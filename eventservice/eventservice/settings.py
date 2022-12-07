@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -134,3 +135,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #]
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+env = environ.Env()
+environ.Env.read_env()
+AWS_ACCESS_KEY=env('AWS_ACCESS_KEY')
+AWS_SECRET=env('AWS_SECRET')
