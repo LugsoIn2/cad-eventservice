@@ -21,10 +21,21 @@ dynamodb = boto3.resource(
 # Get All Files
 def list(request):
     city = request.GET.get('city')
+    date =  request.GET.get('date')
     table = dynamodb.Table('event_table')
-    response = table.scan(FilterExpression=Attr("city").eq(city))
-    print(response)
-    print(city)
+    filter = None
+    if city and date:
+        filter=Attr("city").eq(city) & Attr("eventDate").begins_with(date)
+    elif city:
+        filter=Attr("city").eq(city)
+    elif date:
+        filter=Attr("eventDate").begins_with(date)
+
+    if filter:
+        response = table.scan(FilterExpression=filter)
+    else:
+        response = table.scan()
+
     if response['ResponseMetadata']['HTTPStatusCode'] == 200:
         try:
             items = response['Items']
