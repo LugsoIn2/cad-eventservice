@@ -3,11 +3,12 @@ services:
   eventservice:
     build:
       context: . #Dir for Compose to build
-
+    env_file:
+      - ./.env
     # Portmapping
     ports:
       - "80:80"
       
     volumes: 
     # Copy changes to the image in real-time.
-      - .:/eventservice
+      - ./eventservice:/eventservice
