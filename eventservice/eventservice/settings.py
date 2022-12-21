@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 import environ
 
@@ -124,6 +125,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -140,6 +144,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 env = environ.Env()
-environ.Env.read_env()
-AWS_ACCESS_KEY=env('AWS_ACCESS_KEY')
-AWS_SECRET=env('AWS_SECRET')
+env.read_env(os.path.join(BASE_DIR.parent, '.env'))
+#AWS_ACCESS_KEY=env('AWS_ACCESS_KEY')
+#AWS_SECRET=env('AWS_SECRET')
+AWS_ACCESS_KEY=os.environ.get('AWS_ACCESS_KEY')
+AWS_SECRET=os.environ.get('AWS_SECRET')
