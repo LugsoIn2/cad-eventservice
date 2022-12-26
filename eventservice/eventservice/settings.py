@@ -27,9 +27,6 @@ SECRET_KEY = 'django-insecure-hctjd!d#4_k!-ev_xokc6qj8ghf9cu89#k+66r)xp#o#te2$p*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'service_app',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -134,11 +133,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ## CORS ####
 # enable for productive specific origins
-#CORS_ALLOWED_ORIGINS = [
-#    'http://localhost:8080',
-#]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
 
-CORS_ALLOW_ALL_ORIGINS = True
+]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.netpy\.de$",
+    r"^http://\w+\.netpy\.de$",
+]
+
+#CORS_ALLOW_ALL_ORIGINS = True
 
 
 env = environ.Env()
@@ -147,3 +151,7 @@ env.read_env(os.path.join(BASE_DIR.parent, '.env'))
 #AWS_SECRET=env('AWS_SECRET')
 AWS_ACCESS_KEY=os.environ.get('AWS_ACCESS_KEY')
 AWS_SECRET=os.environ.get('AWS_SECRET')
+
+#ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = [] if not any(ALLOWED_HOSTS) else ALLOWED_HOSTS
