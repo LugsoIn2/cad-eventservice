@@ -138,8 +138,7 @@ CORS_ALLOWED_ORIGINS = [
 
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://\w+\.netpy\.de$",
-    r"^http://\w+\.netpy\.de$",
+    r".*\.netpy\.de",
 ]
 
 #CORS_ALLOW_ALL_ORIGINS = True
