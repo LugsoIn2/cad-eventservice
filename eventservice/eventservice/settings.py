@@ -134,12 +134,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ## CORS ####
 # enable for productive specific origins
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
-
+    'http://127.0.0.1:5173',
 ]
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r".*\.netpy\.de",
+    r"^https://\w+\.netpy\.de$",
+    r"^http://\w+\.netpy\.de$",
 ]
 
 #CORS_ALLOW_ALL_ORIGINS = True
