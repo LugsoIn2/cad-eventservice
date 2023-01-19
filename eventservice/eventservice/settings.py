@@ -161,3 +161,5 @@ AWS_SECRET=os.environ.get('AWS_SECRET')
 #ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
 ALLOWED_HOSTS = [] if not any(ALLOWED_HOSTS) else ALLOWED_HOSTS
+
+EV_TABLE_NAME = os.environ.get('EV_TABLE_NAME')

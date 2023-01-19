@@ -19,9 +19,13 @@ One for all after refactor:
 
 [Terraform Repo](https://github.com/LugsoIn2/cad-terraform-all.git)
 
-## DJANGO ALLOWED_HOST
+## DJANGO ENV file
 Define in the env file the allowed hosts (comma seperated)
 ALLOWED_HOSTS="localhost,127.0.0.1" 
+AWS_ACCESS_KEY=
+AWS_SECRET=
+EV_TABLE_NAME=
+
 
  
 

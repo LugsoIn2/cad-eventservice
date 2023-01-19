@@ -18,11 +18,12 @@ dynamodb = boto3.resource(
     aws_secret_access_key=settings.AWS_SECRET,
     region_name='eu-central-1')
 
+
 # Get All Files
 def list(request):
     city = request.GET.get('city')
     date =  request.GET.get('date')
-    table = dynamodb.Table('event_table')
+    table = dynamodb.Table(settings.EV_TABLE_NAME)
     filter = None
     if city and date:
         filter=Attr("city").eq(city) & Attr("eventDate").begins_with(date)
