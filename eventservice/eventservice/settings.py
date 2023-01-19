@@ -131,6 +131,26 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+## CORS ####
+# enable for productive specific origins
+#CORS_ALLOWED_ORIGINS = [
+#    'http://localhost:8080',
+#]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR.parent, '.env'))
+AWS_ACCESS_KEY=os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET=os.environ.get('AWS_SECRET_ACCESS_KEY')
+
+#ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
+ALLOWED_HOSTS = [] if not any(ALLOWED_HOSTS) else ALLOWED_HOSTS
+
+EV_TABLE_NAME = os.environ.get('EV_TABLE_NAME')
+
 
 ###                 ###
 #       CORS ON       #
@@ -149,17 +169,18 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r".*\.netpy\.de",
 ]
 
+# PROD ONLY
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
 
-
-env = environ.Env()
-env.read_env(os.path.join(BASE_DIR.parent, '.env'))
-#AWS_ACCESS_KEY=env('AWS_ACCESS_KEY')
-#AWS_SECRET=env('AWS_SECRET')
-AWS_ACCESS_KEY=os.environ.get('AWS_ACCESS_KEY')
-AWS_SECRET=os.environ.get('AWS_SECRET')
-
-#ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "").split(",")
-ALLOWED_HOSTS = [] if not any(ALLOWED_HOSTS) else ALLOWED_HOSTS
-
-EV_TABLE_NAME = os.environ.get('EV_TABLE_NAME')
+###                 ###
+#       CORS OFF      #
+###                 ###
+# CSRF_COOKIE_SAMESITE = 'Strict'
+# SESSION_COOKIE_SAMESITE = 'Strict'
+# CSRF_COOKIE_HTTPONLY = True
+# SESSION_COOKIE_HTTPONLY = True
+# 
+# # PROD ONLY
+# # CSRF_COOKIE_SECURE = True
+# # SESSION_COOKIE_SECURE = True
