@@ -11,20 +11,14 @@
 ## New python dependencies:
 ### python -m pip freeze > requirements.txt
 
-## Django env for local
-### put the .env Variable in root directory of the repo 
-
-## Terraform using
-One for all after refactor:
-
-[Terraform Repo](https://github.com/LugsoIn2/cad-terraform-all.git)
-
-## DJANGO ENV file
-Define in the env file the allowed hosts (comma seperated)
-ALLOWED_HOSTS="localhost,127.0.0.1" 
+## Env File
+put the .env Variable in root directory of the repo 
+```
 AWS_ACCESS_KEY=
 AWS_SECRET=
-EV_TABLE_NAME=
+ALLOWED_HOSTS="0.0.0.0,localhost,127.0.0.1"
+EV_TABLE_NAME=''
+```
 
 
  
